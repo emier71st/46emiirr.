@@ -20,6 +20,7 @@
     h1 {
       color: #c2185b;
       margin-bottom: 20px;
+      display: none;
     }
     button {
       font-size: 24px;
@@ -58,25 +59,51 @@
     iframe {
       display: none;
     }
+    #buttons {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
 <h1>Barışalım mı, Kardelen?</h1>
+
+<!-- Başlat butonu -->
+<button id="startBtn">Başlat</button>
+
+<!-- Evet Hayır butonları -->
 <div id="buttons">
   <button id="yes">Evet</button>
   <button id="no">Hayır</button>
 </div>
+
 <div id="message"></div>
 
-<!-- YouTube müzik oynatıcı -->
-<iframe width="0" height="0" src="https://www.youtube.com/embed/k9NmuJV9nOM?start=118&autoplay=1" allow="autoplay"></iframe>
+<!-- YouTube müzik oynatıcı, başlangıçta boş src -->
+<iframe id="music" width="0" height="0" src="" allow="autoplay" allow="autoplay; encrypted-media"></iframe>
 
 <script>
+  const startBtn = document.getElementById("startBtn");
   const yesBtn = document.getElementById("yes");
   const noBtn = document.getElementById("no");
+  const buttonsDiv = document.getElementById("buttons");
   const messageDiv = document.getElementById("message");
+  const musicIframe = document.getElementById("music");
+  const title = document.querySelector("h1");
+
   let noClicks = 0;
+
+  startBtn.addEventListener("click", () => {
+    // Müzik başlat
+    musicIframe.src = "https://www.youtube.com/embed/foa1jeLLXI0?start=78&autoplay=1";
+
+    // Başlat butonunu gizle
+    startBtn.style.display = "none";
+
+    // Başlık ve evet/hayır butonlarını göster
+    title.style.display = "block";
+    buttonsDiv.style.display = "block";
+  });
 
   noBtn.addEventListener("click", () => {
     noClicks++;
@@ -95,7 +122,7 @@
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`;
     try {
       await fetch(url);
-      document.getElementById("buttons").style.display = "none";
+      buttonsDiv.style.display = "none";
       messageDiv.textContent = "Seni çok seviyorum 💗";
     } catch (error) {
       alert("Mesaj gönderilemedi.");
