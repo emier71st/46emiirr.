@@ -1,91 +1,64 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Barışalım mı, Kardelen?</title>
-<style>
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    background: linear-gradient(135deg, #ffe6f0, #ffc1d6);
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    position: relative;
-  }
-  h1 {
-    color: #c2185b;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 4px rgba(255, 192, 203, 0.7);
-  }
-  button {
-    font-size: 24px;
-    padding: 15px 40px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: #f48fb1;
-    color: white;
-    box-shadow: 0 4px 20px rgba(255,105,180,0.7);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  button:hover {
-    box-shadow: 0 6px 25px rgba(255,20,147,0.9);
-  }
-  button:active {
-    transform: scale(0.95);
-  }
-  #yes {
-    font-weight: bold;
-  }
-  #no {
-    font-weight: normal;
-  }
-  #message {
-    margin-top: 25px;
-    font-size: 22px;
-    color: #880e4f;
-    font-weight: bold;
-    text-shadow: 0 0 5px #ff80ab;
-  }
-  /* Kalpler + Kardelen yazısı */
-  .heart {
-    position: fixed;
-    width: 90px;
-    height: 90px;
-    pointer-events: none;
-    animation: floatUp 5s linear infinite;
-    user-select: none;
-    font-weight: bold;
-    color: #ff69b4cc;
-    text-align: center;
-    line-height: 90px;
-    font-size: 18px;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    text-shadow:
-      0 0 5px #ff1493,
-      0 0 10px #ff1493;
-  }
-  .heart svg {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    top: 0;
-    left: 0;
-    fill: #ff69b4;
-    opacity: 0.3;
-    pointer-events: none;
-  }
-  @keyframes floatUp {
-    0% { transform: translateY(100vh) scale(1); opacity: 1;}
-    100% { transform: translateY(-10vh) scale(0.6); opacity: 0;}
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kardelen</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      background: #fff0f6;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      position: relative;
+    }
+    h1 {
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+    button {
+      font-size: 24px;
+      padding: 15px 40px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #f48fb1;
+      color: white;
+      box-shadow: 0 4px 15px rgba(196,24,91,0.6);
+      transition: transform 0.3s ease;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    #message {
+      margin-top: 25px;
+      font-size: 22px;
+      color: #880e4f;
+      font-weight: bold;
+    }
+    .heart {
+      position: fixed;
+      font-size: 18px;
+      color: #ff4081;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px black;
+      animation: floatUp 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(1); opacity: 1;}
+      100% { transform: translateY(-10vh) scale(0.5); opacity: 0;}
+    }
+    iframe {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -95,6 +68,9 @@
   <button id="no">Hayır</button>
 </div>
 <div id="message"></div>
+
+<!-- YouTube müzik oynatıcı -->
+<iframe width="0" height="0" src="https://www.youtube.com/embed/k9NmuJV9nOM?start=118&autoplay=1" allow="autoplay"></iframe>
 
 <script>
   const yesBtn = document.getElementById("yes");
@@ -117,42 +93,28 @@
     const CHAT_ID = "5012869228";
     const text = encodeURIComponent("Kardelen evet dedi 💞");
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`;
-
     try {
       await fetch(url);
       document.getElementById("buttons").style.display = "none";
-      messageDiv.textContent = "Kardelen, gözlerin gerçekten çok güzel... 💖";
+      messageDiv.textContent = "Seni çok seviyorum 💗";
     } catch (error) {
-      alert("Mesaj gönderilirken bir hata oluştu.");
-      console.error(error);
+      alert("Mesaj gönderilemedi.");
     }
   });
 
-  // Kalp + Kardelen yazısı oluşturan fonksiyon
   function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
-
-    // Kalp SVG'si ekle
-    heart.innerHTML = `
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-      Kardelen
-    `;
-
     heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
-    heart.style.opacity = 0.5 + Math.random() * 0.5;
-    heart.style.fontSize = (12 + Math.random() * 12) + "px";
+    heart.style.top = "100%";
+    heart.textContent = "Kardelen";
+    heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+    heart.style.opacity = Math.random();
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 7000);
+    setTimeout(() => heart.remove(), 4000);
   }
 
-  setInterval(createHeart, 350);
+  setInterval(createHeart, 150);
 </script>
 
 </body>
