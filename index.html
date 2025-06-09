@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kardelen</title>
+  <title>Zehram</title>
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%;
@@ -48,7 +48,7 @@
       font-size: 18px;
       color: #ff4081;
       font-weight: bold;
-      text-shadow: 1px 1px 2px black;
+      text-shadow: 2px 2px 4px black;
       animation: floatUp 4s linear infinite;
       pointer-events: none;
     }
@@ -66,7 +66,7 @@
 </head>
 <body>
 
-<h1>Barışalım mı, Kardelen?</h1>
+<h1>Barışalım mı, Zehram?</h1>
 
 <!-- Başlat butonu -->
 <button id="startBtn">Başlat</button>
@@ -79,7 +79,7 @@
 
 <div id="message"></div>
 
-<!-- YouTube müzik oynatıcı, başlangıçta boş src -->
+<!-- YouTube müzik oynatıcı -->
 <iframe id="music" width="0" height="0" src="" allow="autoplay" allow="autoplay; encrypted-media"></iframe>
 
 <script>
@@ -94,8 +94,8 @@
   let noClicks = 0;
 
   startBtn.addEventListener("click", () => {
-    // Müzik başlat
-    musicIframe.src = "https://www.youtube.com/embed/foa1jeLLXI0?start=78&autoplay=1";
+    // Müzik başlat (1 dakika 20 saniye = 80. saniye)
+    musicIframe.src = "https://www.youtube.com/embed/foa1jeLLXI0?start=80&autoplay=1";
 
     // Başlat butonunu gizle
     startBtn.style.display = "none";
@@ -118,7 +118,7 @@
   yesBtn.addEventListener("click", async () => {
     const BOT_TOKEN = "7996559452:AAFUZHzo4URmpsKOXVemh5EkLWvzv-BWQTg";
     const CHAT_ID = "5012869228";
-    const text = encodeURIComponent("Kardelen evet dedi 💞");
+    const text = encodeURIComponent("Zehram evet dedi 💞");
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`;
     try {
       await fetch(url);
@@ -134,7 +134,7 @@
     heart.className = "heart";
     heart.style.left = Math.random() * window.innerWidth + "px";
     heart.style.top = "100%";
-    heart.textContent = "Kardelen";
+    heart.textContent = "Zehram";
     heart.style.animationDuration = (2 + Math.random() * 2) + "s";
     heart.style.opacity = Math.random();
     document.body.appendChild(heart);
