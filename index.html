@@ -79,7 +79,7 @@
   const noBtn = document.getElementById("no");
   const messageDiv = document.getElementById("message");
   let noClicks = 0;
-  let musicStarted = false; // müzik başladı mı?
+  let musicStarted = false;
 
   noBtn.addEventListener("click", () => {
     noClicks++;
@@ -89,11 +89,11 @@
     if (noClicks >= 4) {
       noBtn.style.display = "none";
     }
-    
+
     if (!musicStarted && player && typeof player.playVideo === 'function') {
-      player.seekTo(33, true);
+      player.seekTo(40, true);
       player.unMute();
-      player.setVolume(100); // tam ses
+      player.setVolume(100);
       player.playVideo();
       musicStarted = true;
     }
@@ -129,7 +129,7 @@
 
   setInterval(createHeart, 300);
 
-  // YouTube IFrame API yükle
+  // YouTube API yükle
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -138,12 +138,12 @@
   var player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-      videoId: 'XCRXPLFqYoU',
+      videoId: 'foa1jeLLXI0', // yeni video
       playerVars: {
         autoplay: 1,
-        start: 33,
+        start: 40,
         loop: 1,
-        playlist: 'XCRXPLFqYoU',
+        playlist: 'foa1jeLLXI0',
         controls: 0,
         showinfo: 0,
         modestbranding: 1,
@@ -152,7 +152,7 @@
       },
       events: {
         onReady: function (e) {
-          e.target.playVideo(); // sessiz oynat başta
+          e.target.playVideo(); // sessiz başlayacak
         }
       }
     });
