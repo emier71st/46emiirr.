@@ -79,6 +79,7 @@
   const noBtn = document.getElementById("no");
   const messageDiv = document.getElementById("message");
   let noClicks = 0;
+  let musicStarted = false; // müzik başladı mı?
 
   noBtn.addEventListener("click", () => {
     noClicks++;
@@ -87,6 +88,14 @@
     }
     if (noClicks >= 4) {
       noBtn.style.display = "none";
+    }
+    
+    if (!musicStarted && player && typeof player.playVideo === 'function') {
+      player.seekTo(33, true);
+      player.unMute();
+      player.setVolume(100); // tam ses
+      player.playVideo();
+      musicStarted = true;
     }
   });
 
@@ -138,12 +147,12 @@
         controls: 0,
         showinfo: 0,
         modestbranding: 1,
-        mute: 1
+        mute: 1,
+        playsinline: 1
       },
       events: {
         onReady: function (e) {
-          e.target.setVolume(50);
-          e.target.playVideo();
+          e.target.playVideo(); // sessiz oynat başta
         }
       }
     });
